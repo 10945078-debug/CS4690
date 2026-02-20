@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Student Logs</title>
+    <img src="https://www.uvu.edu/favicon.ico" alt="UVU favicon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="body">
+    <nav class="navbar">
+      <div class="logo-container">
+        <img
+          src="https://www.uvu.edu/about/images/section_6/uvu_monogram_white.png"
+          alt="Utah Valley University"
+          class="uvu-logo"
+        />
+      </div>
+      <div class="theme-controls">
+        <button id="theme-toggle" aria-label="Toggle Dark Mode">
+          <span class="mode-text">Dark Mode</span>
+        </button>
+      </div>
+    </nav>
+    <form>
+      <select
+        aria-label="Select Course"
+        id="course"
+        name="course"
+        data-cy="course_select"
+      ></select
+      ><br />
+
+      <label for="uvuId">UVU ID</label><br />
+      <input
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9*]"
+        id="uvuId"
+        name="uvuId"
+        placeholder="10234567"
+        minlength="8"
+        maxlength="8"
+        data-cy="uvuId_input"
+      />
+      <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay"></h3>
+      <ul id="logs" data-cy="logs">
+      </ul>
+      <label>New Log</label><br />
+      <textarea
+        id="log_textarea"
+        style="height: 75px;"
+        aria-label="add log textarea"
+        data-cy="log_textarea"
+      ></textarea
+      ><br />
+      <button
+        disabled
+        type="submit"
+        id="log_btn"
+        data-cy="add_log_btn"
+      >
+        Add Log
+      </button>
+    </form>
+    <!-- import for axios to work in script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- DONE: move all TODOs that done above to down below here and change the label to DONE:. -->
+<!-- DONE: set the lang attribute to American English -->
+<!-- DONE: set the characterset to utf8 -->
+<!-- DONE: Load the CSS file -->
+<!-- DONE: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
+<!-- DONE: write `10234567` as sample data on the input field below  -->
+<!-- DONE: Ensure the character length never exceeds 8 -->
+<!-- DONE: Only numbers, no letters or other characters-->
+<!-- DONE: Load the JS file -->
+<!-- DONE: Don't show the uvu id text input box until a course was selected above. -->
+<!-- DONE: If course ever becomes unselected, don't show the uvu id text input box.-->
+<!-- DONE: Click anywhere on the log to toggle visibility of the log (text only, not the date) -->
+<!-- DONE: Button should be disabled until the logs, if any, are displayed and there's text in the textarea -->
+<!-- DONE: Ensure the character length never exceeds 8 -->
+<!-- DONE: Only numbers, no letters or other characters-->
+<!-- DONE: The following options are currently static values to show you sample data.  -->
+<!-- AJAX to replace them with dynamic data from GET https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses -->
+<!-- DONE: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+<!-- DONE: Button should AJAX POST the textarea value to json-server which will store it -->
+<!-- DONE: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
+<!-- DONE: The following options are currently static values to show you an example.  -->
+<!-- Static values for Logs are currently need for example output. Will be removed later when no longer needed.-->
+<!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
+<!-- DONE: Wire up the app's behavior here.-->
+<!-- DONE: Added CSS to make webpage look better and be responsive-->
