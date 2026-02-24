@@ -12,62 +12,50 @@ $(() => {
         $('#course').html(optionsHTML);
         $('#uvuId').hide();
         $('#course').on('change', function () {
-            const val = $(this).val();
-            const $stdIDInput = $('#uvuId');
-            if (val === '') {
-                $stdIDInput.hide().val('');
+            if ($(this).val() === '') {
+                $('#uvuId').hide().val('');
             }
             else {
-                $stdIDInput.show();
-                if ($stdIDInput.val().length === 8) {
-                    LoadLogs(val);
+                $('#uvuId').show();
+                if ($('#uvuId').val().length === 8) {
+                    LoadLogs($(this).val());
                 }
             }
         });
     }
     //Checks if number in uvuID input is exactly 8 digits
     function numChecker() {
-        const $stdIDInput = $('#uvuId');
-        $stdIDInput.on('input', function () {
-            var val = $(this).val();
-            if (val.length > 8) {
+        $('#uvuId').on('input', function () {
+            if ($(this).val().length > 8) {
                 $(this).val.slice(0, 8);
                 console.warn('ID cannot be exceed 8 digits');
             }
         });
-        $stdIDInput.on('change', function () {
-            var val = $(this).val();
-            if (val.length !== 8 && val.length > 0) {
+        $('#uvuId').on('change', function () {
+            if ($(this).val().length !== 8 && $(this).val().length > 0) {
                 $(this).addClass('is-invalid').removeClass('is-valid'); // Adds Bootstrap red border and icon
                 alert('UVU ID must be exactly 8 digits long');
                 $(this).val('');
             }
-            else if (val.length === 8) {
+            else if ($(this).val().length === 8) {
                 $(this).removeClass('is-invalid').addClass('is-valid'); // Adds Bootstrap green border
-                const courseId = $('#course').val();
-                if (courseId)
-                    LoadLogs(courseId);
+                if ($('#course').val())
+                    LoadLogs($('#course').val());
             }
         });
     }
     async function LoadLogs(courseId) {
-        const logSelect = $('#logs');
-        const logHeader = $('#uvuIdDisplay');
-        const uvuId = $('#uvuId').val();
-        var logBtn = $('#log_btn');
         // Warning for if uvuId is entered 
-        if (!courseId || !uvuId || uvuId.length !== 8) {
+        if (!courseId || !$('#uvuId').val() || $('#uvuId').val().length !== 8) {
             console.warn("Cannot load: courseId or uvuId is incomplete.");
             return;
         }
         //Clear Previous Results
-        logSelect.empty();
-        const response = await axios.get(`/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`);
-        const urlStream = `/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`;
-        console.log(urlStream);
+        $('#logs').empty();
+        const response = await axios.get(`/api/v1/logs?courseId=${courseId}&uvuId=${$('#uvuId').val()}`);
         const data = await response.data;
         console.log(data);
-        logHeader.html(`Students Logs for ${uvuId}`);
+        $('#uvuIdDisplay').html(`Students Logs for ${$('#uvuId').val()}`);
         if (data && data.length > 0) {
             let items = data.map(log => `<li class="list-group-item list-group-item-action border-start border-4 border-success mb-2 shadow-sm">
           <div class="d-flex w-100 justify-content-between">
@@ -75,54 +63,44 @@ $(() => {
           </div>
           <p class="mb-1 mt-2 font-monospace" style="white-space: pre-wrap;">${log.text}</p>
         </li>`).join('');
-            logSelect.html(items);
+            $('#logs').html(items);
         }
         else {
-            logSelect.html('<li class="list-group-item text-center text-muted">No logs found for this student.</li>');
+            $('#logs').html('<li class="list-group-item text-center text-muted">No logs found for this student.</li>');
         }
-        logBtn.prop('disabled', false);
+        $('#log_btn').prop('disabled', false);
     }
     //Helper Function for displaying logs. Click the log header to make the logs hide/appear
     function logDisplay() {
-        const logHeader = $('#uvuIdDisplay');
-        const logSelect = $('#logs');
-        var logBtn = $('#log_btn');
-        logHeader.on('click', function () {
-            const isHidden = logSelect.is(':hidden');
-            logSelect.toggle();
-            logBtn.prop('disabled', !isHidden);
+        $('#uvuIdDisplay').on('click', function () {
+            const isHidden = $('#logs').is(':hidden');
+            $('#logs').toggle();
+            $('#log_btn').prop('disabled', !isHidden);
         });
     }
     //Add a new log.
     function addLog() {
-        const addBtn = $('#log_btn');
-        const textArea = $('#log_textarea');
-        const courseInput = $('#course');
-        const uvuIdInput = $('#uvuId');
-        addBtn.on('click', async function (event) {
+        $('#log_btn').on('click', async function (event) {
             event.preventDefault();
-            const courseId = courseInput.val();
-            const uvuId = uvuIdInput.val();
-            const logText = textArea.val();
             let logDate = new Date();
             let randId = randomId();
             //Check for empty logs
-            if (!logText.trim())
+            if (!$('#log_textarea').val().trim())
                 return;
             // Add a new log to the logs in db.json
             try {
                 await axios.post('/api/v1/logs', {
-                    courseId: courseId,
-                    uvuId: uvuId,
+                    courseId: $('#course').val(),
+                    uvuId: $('#uvuId').val(),
                     date: `${logDate.toLocaleDateString()}, ${logDate.toLocaleTimeString()}`,
-                    text: logText,
+                    text: $('#log_textarea').val(),
                     id: randId
                 });
                 console.log('Log added successfully');
                 // Clear the text area value after added to logs
-                textArea.val('');
+                $('#log_textarea').val('');
                 // Reload logs after a new log is added
-                await LoadLogs(courseId);
+                await LoadLogs($('#course').val());
             }
             catch (error) {
                 console.error('Error adding log:', error);
@@ -147,12 +125,11 @@ $(() => {
     //Support function to apply themes
     // Update the attribute name to Bootstrap standard
     function applyTheme(newTheme) {
-        const modeText = $('.mode-text');
         // Bootstrap 5.3+ looks for 'data-bs-theme'
         $('html').attr('data-bs-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         // Update button text to show what the NEXT click will do
-        modeText.text(newTheme === 'dark' ? 'Switch to Light' : 'Switch to Dark');
+        $('.mode-text').text(newTheme === 'dark' ? 'Switch to Light' : 'Switch to Dark');
     }
     function initTheme() {
         //User Presf
