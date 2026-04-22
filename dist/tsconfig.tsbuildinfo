@@ -1,0 +1,1 @@
+{"root":["../app.ts","../bin/www.ts","../models/types.ts","../repositories/apilogrepository.ts","../repositories/ilogrepository.ts","../routes/course.ts","../routes/log.ts","../public/script.js"],"version":"5.9.3"}

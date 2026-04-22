@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     /* Target and Libraries */
-    "target": "ES2020",                                 /* Modern JS output */
+    "target": "ESNext",                                 /* Modern JS output */
     "lib": ["DOM", "DOM.Iterable", "ESNext"],           /* Essential for document.getElementById, etc. */
-    "module": "ESNext",                                 /* Uses import/export syntax */
-    "moduleResolution": "node",                         /* Helps find Axios and other packages */
+    "module": "nodenext",                                 /* Uses import/export syntax */
+    "moduleResolution": "nodenext",                         /* Helps find Axios and other packages */
+    "allowJs": true,
 
     /* Strictness & Safety */
     "strict": true,                                     /* Enables all strict type-checking options */
@@ -14,15 +15,16 @@
     "noUnusedParameters": true,                         /* Keeps function signatures clean */
 
     /* Output Settings */
-    "outDir": "public/dist",                                 /* Where your compiled .js files go */
+    "outDir": "./dist",                                 /* Where your compiled .js files go */
     "sourceMap": true,                                  /* Helps you debug TS code in the browser console */
     "removeComments": false,                            /* Keep comments for readability in dev */
     
     /* Interop */
+    "resolveJsonModule": true,
     "esModuleInterop": true,                            /* Simplifies importing non-ESM modules like Axios */
     "forceConsistentCasingInFileNames": true,           /* Important for cross-platform (Windows vs Mac) */
     "skipLibCheck": true                                /* Speeds up compilation by skipping type checks of .d.ts files */
   },
-  "include": ["public/src/**/*.ts"],                           /* Tells TS to look in your src folder */
+  "include": ["**/*.ts", "public/script.js"],                           /* Tells TS to look in your src folder */
   "exclude": ["node_modules"]                           /* Ignore the heavy stuff */
 }
