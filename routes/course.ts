@@ -29,15 +29,4 @@ router.post('/', async function(req: Request, res: Response, next: NextFunction)
     }
 });
 
-
-// This handles GET /api/v1/courses
-/*
-router.get('/', (_req: Request, res: Response) => {
-    //const db = JSON.parse(fs.readFileSync('./db.json', 'utf-8'));
-    //const courses: Course[] = db.courses;
-    const courseReop = new ApiLogRepository;
-    const courses = courseReop.getCourses();
-    res.json(courses);
-});
-*/
 export default router;
