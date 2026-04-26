@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Target and Libraries */
-    "target": "ESNext",                                 /* Modern JS output */
+    "target": "es2020",                                 /* Modern JS output */
     "lib": ["DOM", "DOM.Iterable", "ESNext"],           /* Essential for document.getElementById, etc. */
     "module": "nodenext",                                 /* Uses import/export syntax */
     "moduleResolution": "nodenext",                         /* Helps find Axios and other packages */
@@ -15,6 +15,7 @@
     "noUnusedParameters": true,                         /* Keeps function signatures clean */
 
     /* Output Settings */
+    "rootDir": "./",
     "outDir": "./dist",                                 /* Where your compiled .js files go */
     "sourceMap": true,                                  /* Helps you debug TS code in the browser console */
     "removeComments": false,                            /* Keep comments for readability in dev */

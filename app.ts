@@ -1,10 +1,15 @@
 import express, {Request, Response} from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { connectDB } from './server/db/connection.js'
 //import fs from 'fs';
+//import * as fs from 'node:fs/promises';
 //import { Course, Log } from './models/types.js';
-import logRouter from './routes/log.js';
-import courseRouter from './routes/course.js';
+
+await connectDB();
+
+const logRouter = (await import ('./routes/log.js')).default;
+const courseRouter =(await import ('./routes/course.js')).default;
 
 const app = express();
 const port = 3000;
@@ -13,8 +18,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use(express.static(path.join(__dirname, '..', 'repositories')));
+app.use(express.static(path.join(__dirname, '..', '/public')));
+app.use(express.static(path.join(__dirname, '..', '/repositories')));
 
 //Use static file from 'dist' directory
 app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
