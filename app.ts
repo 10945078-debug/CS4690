@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { connectDB } from './server/db/connection.js'
+import { connectDB } from './db/connection.js'
 //import fs from 'fs';
 //import * as fs from 'node:fs/promises';
 //import { Course, Log } from './models/types.js';
