@@ -4,21 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "server": "npm run build --clean --verbose && node dist/app.js",
-    "build": "tsc --build --verbose && copyfiles -u 0 db.json dist/",
-    "prestart": "npm run build"
+    "server": "json-server db.json --routes routes.json"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.5.0",
-    "copyfiles": "^2.4.1",
-    "json-server": "^0.17.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "json-server": "0.17.0"
   },
   "dependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.3.0",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "mongodb": "^7.2.0",
-    "mongoose": "^9.4.1"
+    "axios": "^1.13.4",
+    "typescript": "^5.9.3"
   }
 }
