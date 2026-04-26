@@ -2,9 +2,6 @@ import express, {Request, Response} from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { connectDB } from './db/connection.js'
-//import fs from 'fs';
-//import * as fs from 'node:fs/promises';
-//import { Course, Log } from './models/types.js';
 
 await connectDB();
 
@@ -41,35 +38,3 @@ app.listen(port, () => {
 });
 
 export default app;
-
-//GRAVEYARD
-/*
-//API: Get All Courses
-app.get('/api/v1/courses', (_req: Request, res: Response) => {
-    const db = JSON.parse(fs.readFileSync('./db.json', 'utf-8'));
-    const courses: Course[] = db.courses;
-    res.json(courses)
-});
-
-//API: Get log by Course and UVU ID
-app.get('/api/v1/logs', (req: Request, res: Response) => {
-    //console.log('entering /api/v1');
-    const { courseId, uvuId } = req.query;
-    const db = JSON.parse(fs.readFileSync('./db.json', 'utf-8'));
-
-    const filteredLogs: Log[] = db.logs.filter((l: Log) => 
-    l.courseId === courseId && l.uvuId === uvuId);
-    res.json(filteredLogs)
-});
-
-//API: Add a new log
-app.post('/api/v1/logs', (req: Request, res: Response) => {
-    const newLog: Log = req.body;
-    const db = JSON.parse(fs.readFileSync('./db.json', 'utf-8'));
-
-    db.logs.push(newLog);
-    fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
-
-    res.status(201).json(newLog);
-});
-*/
