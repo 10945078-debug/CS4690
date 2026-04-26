@@ -1,4 +1,6 @@
-import {Course, Log} from "../models/types.js";
+//import {Course, Log} from "../models/types.js";
+import {Course} from "../models/Course.js";
+import {Log} from "../models/Log.js";
 
 export interface ILogRepository {
     getCourses(): Promise<Course[]>;

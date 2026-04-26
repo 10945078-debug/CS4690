@@ -7,8 +7,8 @@ router.get('/', async function(req: Request, res: Response, next: NextFunction) 
     try {
         const { courseId, uvuId } = req.query;
 
-        const logReop = new ApiLogRepository;
-        const logs = await logReop.getLogs(courseId as string, uvuId as string);
+        const logRepo = new ApiLogRepository();
+        const logs = await logRepo.getLogs(courseId as string, uvuId as string);
 
         res.json(logs);
     } catch (error) {
@@ -18,11 +18,11 @@ router.get('/', async function(req: Request, res: Response, next: NextFunction) 
 
 router.post('/', async function(req: Request, res: Response, next: NextFunction) {
     try {
-        const { courseId , uvuId, text } = req.query;
+        const { courseId , uvuId, text } = req.body;
 
-        const logReop = new ApiLogRepository;
+        const logRepo = new ApiLogRepository();
 
-        let log = await logReop.addLog(courseId as any as string, uvuId as any as string, text as any as string);
+        let log = await logRepo.addLog(courseId as string, uvuId as string, text as string);
 
         res.json(log);
     } catch (error) {

@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { ApiLogRepository } from "../repositories/ApiLogRepository.js";
-import {Course} from "../models/types.js"
+import {Course} from "../models/Course.js"
 
 const router = express.Router();
 
@@ -9,8 +9,8 @@ router.get('/', async function(req: Request, res: Response, next: NextFunction) 
        const {courseId} = req.query;
        console.log(JSON.stringify(courseId));
 
-        const courseReop = new ApiLogRepository;
-        const logs = await courseReop.getCourses()
+        const courseRepo = new ApiLogRepository();
+        const logs = await courseRepo.getCourses()
 
         res.json(logs);
     } catch (error) {
